@@ -1,4 +1,4 @@
-require("dotenv").config();
+require('dotenv').config();
 
 const express = require('express');
 
@@ -7,7 +7,9 @@ const app = express();
 
 app.use(express.json());
 
-// VER DESPUES PORQUE NO TOMA EL PUERTO DEL ENV. const { PORT } = process.env;
+const { PORT } = process.env;
+
+
 //crear base de datos (usuarios, notas, categorias)
 //hacer populate db
 //endpoints
@@ -26,6 +28,6 @@ app.use(express.json());
 //delete /notes/:id
 
 
-app.listen(8080, () => {
-    console.log(`Server listening on http://localhost:8080`);
+app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
   });

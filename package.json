@@ -4,7 +4,9 @@
   "description": "Este es el segundo proyecto en el bootcamp de full-stack developer de Hack-a-boss.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js",
+    "initDb": "node src/database/initDb.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,8 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
