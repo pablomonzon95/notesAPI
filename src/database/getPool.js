@@ -6,6 +6,7 @@ const {
   DATABASE_PORT,
   DATABASE_USER,
   DATABASE_PASSWORD,
+  DATABASE_NAME,
 } = process.env;
 
 let pool;
@@ -18,6 +19,7 @@ const getPool = () => {
       port: DATABASE_PORT,
       user: DATABASE_USER,
       password: DATABASE_PASSWORD,
+      database: DATABASE_NAME,
       timezone: "Z",
     });
   }
