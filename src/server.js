@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { createUser } = require("./controllers/users");
+const { createUser, activateUser } = require("./controllers/users");
 const express = require("express");
 
 const { handleError, handleNotFound } = require("./middlewares");
@@ -17,7 +17,7 @@ const { PORT } = process.env;
 //--registro (lo hacemos con mail)
 //login
 app.post("/users", createUser);
-
+app.get("/activate/:registrationCode", activateUser);
 //USUARIOS REGISTRADOS
 //get /notes (solo devuelve titulos);
 //get /notes/:id (devuelve nota completa con imagen); ?query params

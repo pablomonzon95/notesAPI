@@ -44,6 +44,7 @@ const initDb = async () => {
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(200) NOT NULL,
             description VARCHAR(5000) NOT NULL,
+            image VARCHAR(200),
             categoryId INT UNSIGNED NOT NULL,
             userId INT UNSIGNED NOT NULL,
             FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,

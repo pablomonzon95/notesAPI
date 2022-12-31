@@ -1,7 +1,7 @@
 const { MAILJET_PUBLIC_KEY, MAILJET_SECRET_KEY, SENDER_EMAIL, SENDER_NAME } =
   process.env;
 
-const mailjet = require("node-mailjet").connect(
+const mailjet = require("node-mailjet").apiConnect(
   MAILJET_PUBLIC_KEY,
   MAILJET_SECRET_KEY
 );
