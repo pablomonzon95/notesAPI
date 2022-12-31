@@ -1,17 +1,21 @@
 require("dotenv").config();
 const getPool = require("./getPool");
 
-// Función que crea desde cero todas las tablas de la DB
+// Función que crea desde cero la DB con todas sus tablas
 
 const initDb = async () => {
   try {
     const pool = getPool();
+    await pool.query(`CREATE DATABASE IF NOT EXISTS api_notes;`);
+    await pool.query(`USE api_notes;`);
+
+    console.log("Database created");
 
     console.log("Deleting tables...");
 
-    await pool.query("DROP TABLE IF EXISTS users;");
     await pool.query("DROP TABLE IF EXISTS notes;");
     await pool.query("DROP TABLE IF EXISTS categories;");
+    await pool.query("DROP TABLE IF EXISTS users;");
 
     console.log("Creating users table...");
 
@@ -24,20 +28,6 @@ const initDb = async () => {
         );
     `);
 
-    console.log("Creating notes table...");
-
-    await pool.query(`
-        CREATE TABLE notes (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            title VARCHAR(200) NOT NULL,
-            description VARCHAR(5000) NOT NULL,
-            userId INT UNSIGNED NOT NULL,
-            categoryId INT UNSIGNED NOT NULL,
-            FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
-            FOREIGN KEY (CategoryId) REFERENCES categories (id) ON DELETE CASCADE
-        );
-    `);
-
     console.log("Creating categories table...");
 
     await pool.query(`
@@ -47,10 +37,23 @@ const initDb = async () => {
         );
     `);
 
+    console.log("Creating notes table...");
 
+    await pool.query(`
+        CREATE TABLE notes (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            title VARCHAR(200) NOT NULL,
+            description VARCHAR(5000) NOT NULL,
+            categoryId INT UNSIGNED NOT NULL,
+            userId INT UNSIGNED NOT NULL,
+            FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
+            FOREIGN KEY (categoryId) REFERENCES categories (id) ON DELETE CASCADE
+          );
+          
+        
+    `);
 
-
-    console.log("¡All done! 🚀");
+    console.log("¡All done!🌠");
   } catch (error) {
     console.error(error.message);
   } finally {
