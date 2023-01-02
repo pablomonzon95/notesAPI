@@ -1,3 +1,3 @@
-const createUserSchema = require("./createUsersSchema");
+const userSchema = require("./usersSchema");
 
-module.exports = { createUserSchema };
+module.exports = { userSchema };

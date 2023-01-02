@@ -1,4 +1,4 @@
-const { createUserSchema } = require("../../schemas/users");
+const { userSchema } = require("../../schemas/users");
 
 const { generateError, sendMail } = require("../../utils");
 const bcrypt = require("bcrypt");
@@ -8,7 +8,7 @@ const { restart } = require("nodemon");
 const createUser = async (req, res, next) => {
   try {
     //Validamos el body de la peticion con Joi
-    await createUserSchema.validateAsync(req.body);
+    await userSchema.validateAsync(req.body);
 
     const { email, password } = req.body;
 
