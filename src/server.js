@@ -1,9 +1,16 @@
 require("dotenv").config();
 const { createUser, activateUser, loginUser } = require("./controllers/users");
-const { getNotes, createNote } = require("./controllers/notes");
+const {
+  getNotes,
+  createNote,
+  getNote,
+  editNote,
+  deleteNote,
+} = require("./controllers/notes");
 const express = require("express");
 
 const { handleError, handleNotFound, validateAuth } = require("./middlewares");
+
 const app = express();
 
 app.use(express.json());
@@ -24,12 +31,16 @@ app.post("/login", loginUser);
 //get /notes (solo devuelve titulos);
 app.get("/notes", validateAuth, getNotes);
 //get /notes/:id (devuelve nota completa con imagen); ?query params
+app.get("/note/:id", validateAuth, getNote);
 //get /notes/? query params (para notas publicas)
+
 // post /notes (crear una nota nueva);
 app.post("/notes", validateAuth, createNote);
-// put /notes/:id
-//delete /notes/:id
 
+// put /notes/:id
+app.put("/note/:id", validateAuth, editNote);
+//delete /notes/:id
+app.delete("/note/:id", validateAuth, deleteNote);
 // Middlware 404. Solo las peticiones que no coincidan con ningún endpoint van a llegar aquí
 app.use(handleNotFound);
 
