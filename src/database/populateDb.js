@@ -22,8 +22,8 @@ const populateDb = async () => {
         `);
 
     console.log("Inserting categories...");
-    await pool.query(`INSERT INTO categories (name, userId) VALUES
-('hogar',1),('escuela',3),('deportes',2)`);
+    await pool.query(`INSERT INTO categories (name) VALUES
+('hogar'),('escuela'),('deportes')`);
     console.log("Inserting notes...");
 
     await pool.query(`

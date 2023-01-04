@@ -12,6 +12,10 @@ const getNote = async (req, res, next) => {
     if (!note) {
       generateError("Note doesnt exists", 404);
     }
+    const loggedUserId = req.auth.id;
+    if(loggedUserId !== note.userId){
+      generateError('You dont have permission to see this note', 401);
+    }
     res.status(200).send({ status: "ok", data: note });
   } catch (error) {
     next(error);

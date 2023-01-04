@@ -34,9 +34,7 @@ const initDb = async () => {
     await pool.query(`
         CREATE TABLE categories (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            name VARCHAR(50) NOT NULL,
-            userId INT UNSIGNED NOT NULL,
-            FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
+            name VARCHAR(50) NOT NULL
         );
     `);
 
