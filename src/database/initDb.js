@@ -24,6 +24,7 @@ const initDb = async () => {
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             email VARCHAR(100) UNIQUE NOT NULL,
             password VARCHAR(100) NOT NULL,
+            role ENUM("admin","normal") DEFAULT "normal",
             registrationCode VARCHAR(100)
         );
     `);
@@ -33,7 +34,9 @@ const initDb = async () => {
     await pool.query(`
         CREATE TABLE categories (
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
-            name VARCHAR(50) NOT NULL
+            name VARCHAR(50) NOT NULL,
+            userId INT UNSIGNED NOT NULL,
+            FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE
         );
     `);
 
@@ -45,6 +48,7 @@ const initDb = async () => {
             title VARCHAR(200) NOT NULL,
             note VARCHAR(5000) NOT NULL,
             image VARCHAR(200),
+            public BOOLEAN DEFAULT false,
             categoryId INT UNSIGNED NOT NULL,
             userId INT UNSIGNED NOT NULL,
             FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,

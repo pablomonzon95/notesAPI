@@ -13,29 +13,29 @@ const populateDb = async () => {
     console.log("Inserting users...");
 
     await pool.query(`
-        INSERT INTO users (email, password) VALUES 
-        ("pablo@email.com", "${await bcrypt.hash("123456", 10)}" ),
-        ("juan@email.com", "${await bcrypt.hash("123456", 10)}" ),
-        ("maria@email.com", "${await bcrypt.hash("123456", 10)}"),
-        ("jorge@email.com", "${await bcrypt.hash("123456", 10)}"),
-        ("luis@email.com", "${await bcrypt.hash("123456", 10)}")
+        INSERT INTO users (email, password, role) VALUES 
+        ("pablo@email.com", "${await bcrypt.hash("123456", 10)}","admin" ),
+        ("juan@email.com", "${await bcrypt.hash("123456", 10)}","normal" ),
+        ("maria@email.com", "${await bcrypt.hash("123456", 10)}","normal"),
+        ("jorge@email.com", "${await bcrypt.hash("123456", 10)}","normal"),
+        ("luis@email.com", "${await bcrypt.hash("123456", 10)}","normal")
         `);
 
     console.log("Inserting categories...");
-    await pool.query(`INSERT INTO categories (name) VALUES
-('hogar'),('escuela'),('deportes')`);
+    await pool.query(`INSERT INTO categories (name, userId) VALUES
+('hogar',1),('escuela',3),('deportes',2)`);
     console.log("Inserting notes...");
 
     await pool.query(`
-        INSERT INTO notes (title, description,categoryId, userId) VALUES 
-        ("Examen de Sql", "Tengo que repasar los join",2,1),
-        ("Examen Back", "Tengo que repasar los modulos de node",2,1),
-        ("Veterinario toby", "Ponerle la vacuna al perro",1,1),
-        ("Ir al gimnasio", "4 veces por semana durante 2 horas",3,1),
-        ("Salir a correr", "Esta semana tengo que empezar",3,2),
-        ("Ir a comprar", "Tengo que comprar los regalos de navidad",1,2),
-        ("Examen de ingles", "I need to improve my english ",2,2),
-        ("Lista de compra", "Tomates, lechugas y manzanas", 1,3)
+        INSERT INTO notes (title, note, public, categoryId, userId) VALUES 
+        ("Examen de Sql", "Tengo que repasar los join",false,2,1),
+        ("Examen Back", "Tengo que repasar los modulos de node",true,2,1),
+        ("Veterinario toby", "Ponerle la vacuna al perro",false,1,1),
+        ("Ir al gimnasio", "4 veces por semana durante 2 horas",true,3,1),
+        ("Salir a correr", "Esta semana tengo que empezar",false,3,2),
+        ("Ir a comprar", "Tengo que comprar los regalos de navidad",false,1,2),
+        ("Examen de ingles", "I need to improve my english ",false,2,2),
+        ("Lista de compra", "Tomates, lechugas y manzanas",false,1,3)
     `);
 
     console.log("¡All done! 🤗");

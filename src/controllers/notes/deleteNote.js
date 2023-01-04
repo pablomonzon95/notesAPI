@@ -1,5 +1,5 @@
 const { generateError } = require("../../utils");
-const { editNoteSchema, noteIdSchema } = require("../../schemas/notes");
+const { noteIdSchema } = require("../../schemas/notes");
 const { selectNoteById, deleteNoteById } = require("../../repositories/notes");
 const deleteNote = async (req, res, next) => {
   try {

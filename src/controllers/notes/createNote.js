@@ -5,8 +5,14 @@ const createNote = async (req, res, next) => {
     const userId = req.auth.id;
 
     await noteSchema.validateAsync(req.body);
-    const { title, note, categoryId } = req.body;
-    const idNote = await insertNote({ title, note, categoryId, userId });
+    const { title, note, public, categoryId } = req.body;
+    const idNote = await insertNote({
+      title,
+      note,
+      public,
+      categoryId,
+      userId,
+    });
     res.status(200).send({
       status: "ok",
       data: {

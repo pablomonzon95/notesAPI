@@ -7,9 +7,16 @@ const {
   editNote,
   deleteNote,
 } = require("./controllers/notes");
+
+const { createCategory, deleteCategory } = require("./controllers/categories");
 const express = require("express");
 
-const { handleError, handleNotFound, validateAuth } = require("./middlewares");
+const {
+  handleError,
+  handleNotFound,
+  validateAuth,
+  checkAdmin,
+} = require("./middlewares");
 
 const app = express();
 
@@ -41,6 +48,10 @@ app.post("/notes", validateAuth, createNote);
 app.put("/note/:id", validateAuth, editNote);
 //delete /notes/:id
 app.delete("/note/:id", validateAuth, deleteNote);
+
+app.post("/categories", validateAuth, createCategory);
+
+app.delete("/categories/:id", validateAuth, checkAdmin, deleteCategory);
 // Middlware 404. Solo las peticiones que no coincidan con ningún endpoint van a llegar aquí
 app.use(handleNotFound);
 

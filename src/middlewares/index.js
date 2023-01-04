@@ -1,4 +1,5 @@
 const handleError = require("./handleError");
 const handleNotFound = require("./handleNotFound");
 const validateAuth = require("./validateAuth");
-module.exports = { handleError, handleNotFound, validateAuth };
+const checkAdmin = require("./checkAdmin");
+module.exports = { handleError, handleNotFound, validateAuth, checkAdmin };
