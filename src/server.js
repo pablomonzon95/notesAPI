@@ -24,34 +24,35 @@ app.use(express.json());
 
 const { PORT } = process.env;
 
-//crear base de datos (usuarios, notas, categorias)
-//hacer populate db
-//endpoints
+//ENDPOINTS DE USUARIOS
 
-//USUARIOS ANONIMOS
-//--registro (lo hacemos con mail)
-//login
+//Crea un nuevo usuario
 app.post("/users", createUser);
+//Activa el usuario creado
 app.get("/activate/:registrationCode", activateUser);
+//Loguea al usuario y genera un token
 app.post("/login", loginUser);
-//USUARIOS REGISTRADOS
-//get /notes (solo devuelve titulos);
-app.get("/notes", validateAuth, getNotes);
-//get /notes/:id (devuelve nota completa con imagen); ?query params
-app.get("/note/:id", validateAuth, getNote);
-//get /notes/? query params (para notas publicas)
 
-// post /notes (crear una nota nueva);
+//ENDPOINTS DE NOTAS
+
+//Crea una nota nueva al usuario logueado
 app.post("/notes", validateAuth, createNote);
-
-// put /notes/:id
+//Devuelve la lista de notas del usuario logueado (solo títulos)
+app.get("/notes", validateAuth, getNotes);
+//Devuelve la nota completa con ese id
+app.get("/note/:id", validateAuth, getNote);
+//Edita una nota (título, contenido de la nota o ambos)
 app.put("/note/:id", validateAuth, editNote);
-//delete /notes/:id
+//Borra una nota
 app.delete("/note/:id", validateAuth, deleteNote);
 
-app.post("/categories", validateAuth, createCategory);
+//ENDPOINTS DE CATEGORÍAS
 
+//Crea una categoría (cualquier usuario registrado puede crear una categoría)
+app.post("/categories", validateAuth, createCategory);
+//Borra una categoría (sólo los usuarios con el role de admin pueden borrar categorías)
 app.delete("/categories/:id", validateAuth, checkAdmin, deleteCategory);
+
 // Middlware 404. Solo las peticiones que no coincidan con ningún endpoint van a llegar aquí
 app.use(handleNotFound);
 

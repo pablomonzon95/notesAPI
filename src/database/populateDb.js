@@ -27,15 +27,18 @@ const populateDb = async () => {
     console.log("Inserting notes...");
 
     await pool.query(`
+        INSERT INTO notes (title, note,  categoryId, userId) VALUES 
+        ("Examen Back", "Tengo que repasar los modulos de node",2,1),
+        ("Veterinario toby", "Ponerle la vacuna al perro",1,1),
+        ("Salir a correr", "Esta semana tengo que empezar",3,2),
+        ("Ir a comprar", "Tengo que comprar los regalos de navidad",1,2),
+        ("Examen de ingles", "I need to improve my english ",2,2),
+        ("Lista de compra", "Tomates, lechugas y manzanas",1,3)
+    `);
+    await pool.query(`
         INSERT INTO notes (title, note, public, categoryId, userId) VALUES 
-        ("Examen de Sql", "Tengo que repasar los join",false,2,1),
-        ("Examen Back", "Tengo que repasar los modulos de node",true,2,1),
-        ("Veterinario toby", "Ponerle la vacuna al perro",false,1,1),
-        ("Ir al gimnasio", "4 veces por semana durante 2 horas",true,3,1),
-        ("Salir a correr", "Esta semana tengo que empezar",false,3,2),
-        ("Ir a comprar", "Tengo que comprar los regalos de navidad",false,1,2),
-        ("Examen de ingles", "I need to improve my english ",false,2,2),
-        ("Lista de compra", "Tomates, lechugas y manzanas",false,1,3)
+        ("Examen de Sql", "Tengo que repasar los join",TRUE,2,1),
+        ("Ir al gimnasio", "4 veces por semana durante 2 horas",TRUE,3,1)
     `);
 
     console.log("¡All done! 🤗");

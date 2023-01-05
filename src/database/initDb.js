@@ -46,7 +46,7 @@ const initDb = async () => {
             title VARCHAR(200) NOT NULL,
             note VARCHAR(5000) NOT NULL,
             image VARCHAR(200),
-            public BOOLEAN DEFAULT false,
+            public BOOLEAN NOT NULL DEFAULT FALSE,
             categoryId INT UNSIGNED NOT NULL,
             userId INT UNSIGNED NOT NULL,
             FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
