@@ -1,4 +1,5 @@
 require("dotenv").config();
+const fileUpload = require("express-fileupload");
 const { createUser, activateUser, loginUser } = require("./controllers/users");
 const {
   getNotes,
@@ -6,6 +7,7 @@ const {
   getNote,
   editNote,
   deleteNote,
+  getPublicNotes,
 } = require("./controllers/notes");
 
 const { createCategory, deleteCategory } = require("./controllers/categories");
@@ -21,6 +23,7 @@ const {
 const app = express();
 
 app.use(express.json());
+app.use(fileUpload());
 
 const { PORT } = process.env;
 
@@ -45,6 +48,8 @@ app.get("/note/:id", validateAuth, getNote);
 app.put("/note/:id", validateAuth, editNote);
 //Borra una nota
 app.delete("/note/:id", validateAuth, deleteNote);
+//Devuelve todas la notas públicas(no se require estar logueado)
+app.get("/public", getPublicNotes);
 
 //ENDPOINTS DE CATEGORÍAS
 

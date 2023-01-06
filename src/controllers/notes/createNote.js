@@ -1,5 +1,6 @@
 const { noteSchema } = require("../../schemas/notes");
-const { insertNote } = require("../../repositories/notes");
+const { insertNote, insertNoteImage } = require("../../repositories/notes");
+const { processAndSaveImage } = require("../../utils");
 const createNote = async (req, res, next) => {
   try {
     const userId = req.auth.id;
@@ -13,12 +14,23 @@ const createNote = async (req, res, next) => {
       categoryId,
       userId,
     });
+    let imageName;
+    if (req.files) {
+      const image = req.files.image;
+
+      imageName = await processAndSaveImage(image.data);
+      await insertNoteImage(imageName, idNote);
+    } else {
+      imageName = "No images";
+    }
+
     res.status(200).send({
       status: "ok",
       data: {
         title: title,
         note: note,
         categoryiD: categoryId,
+        image: imageName,
         userId: userId,
         noteId: idNote,
       },

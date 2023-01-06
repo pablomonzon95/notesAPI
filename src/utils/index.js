@@ -1,3 +1,4 @@
 const generateError = require("./generateError");
 const sendMail = require("./sendMail");
-module.exports = { generateError, sendMail };
+const processAndSaveImage = require("./processAndSaveImage");
+module.exports = { generateError, sendMail, processAndSaveImage };
