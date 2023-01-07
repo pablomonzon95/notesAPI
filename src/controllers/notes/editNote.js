@@ -5,6 +5,13 @@ const {
   editNoteById,
   insertNoteImage,
 } = require("../../repositories/notes");
+
+/**
+ * Función que valida el id recibido como parametro , verifica que la nota a editar exista y pertenezca al usuario que está logueado.
+ * Posteriormente valida el body de la petición.
+ * Esta función permite editar cualquier campo de la nota (incluido añadir una imagen).
+ * Devuelve los datos de la nota ya actualizados.
+ */
 const editNote = async (req, res, next) => {
   try {
     const { id } = req.params;

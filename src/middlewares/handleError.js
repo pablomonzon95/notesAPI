@@ -1,3 +1,5 @@
+//Middleware que se encarga de gestionar todos los errores.
+
 const handleError = (error, req, res, next) => {
   console.error(error);
 

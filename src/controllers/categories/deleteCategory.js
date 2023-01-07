@@ -4,6 +4,9 @@ const {
   selectCategoryById,
   deleteCategoryById,
 } = require("../../repositories/categories");
+
+/**Función que valida el id pasado como parámetro, verifica que exista la categoria y de ser así la elimina, devuelve una confirmación de la eliminación. */
+
 const deleteCategory = async (req, res, next) => {
   try {
     const { id } = req.params;

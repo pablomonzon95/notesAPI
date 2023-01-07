@@ -1,32 +1,30 @@
 const {
-    selectUserByRegistrationCode,
-    deleteRegistrationCode,
-  } = require("../../repositories/users");
-  const { generateError } = require("../../utils");
-  
-  const activateUser = async (req, res, next) => {
-    try {
-      // Recogemos el registrationCode de los params
-      const { registrationCode } = req.params;
-  
-      // Buscamos en la DB si hay algun user con ese registrationCode
-      const user = await selectUserByRegistrationCode(registrationCode);
-  
-      // Si no lo hay, quiere decir que o el código es inválido, o el usuario ya ha sido activado (es decir, que ya se ha borrado ese código). Lanzamos un error indicando lo dicho
-      if (!user) {
-        generateError("Invalid registration code or user already activated", 400);
-      }
-  
-      // Procedemos a eliminar el código de registro para activar al usuario
-      await deleteRegistrationCode(registrationCode);
-  
-      res
-        .status(200)
-        .send({ status: "ok", message: "User activated succesfully!" });
-    } catch (error) {
-      next(error);
+  selectUserByRegistrationCode,
+  deleteRegistrationCode,
+} = require("../../repositories/users");
+const { generateError } = require("../../utils");
+/**
+ * Función que se encarga de activar un usuario que acaba de registrarse.
+ * Comprueba que el código de registro sea valido y de ser así lo elimina de la base de datos para que el usuario pueda posteriormente loguearse.
+ */
+const activateUser = async (req, res, next) => {
+  try {
+    const { registrationCode } = req.params;
+
+    const user = await selectUserByRegistrationCode(registrationCode);
+
+    if (!user) {
+      generateError("Invalid registration code or user already activated", 400);
     }
-  };
-  
-  module.exports = activateUser;
-  
+
+    await deleteRegistrationCode(registrationCode);
+
+    res
+      .status(200)
+      .send({ status: "ok", message: "User activated succesfully!" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = activateUser;

@@ -1,3 +1,5 @@
+//Función encargada de enviar un email con el email y nombre del remitente , un asunto y el contenido (link de activación en nuestro caso).
+
 const { MAILJET_PUBLIC_KEY, MAILJET_SECRET_KEY, SENDER_EMAIL, SENDER_NAME } =
   process.env;
 

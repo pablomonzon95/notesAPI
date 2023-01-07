@@ -3,6 +3,11 @@ const { userSchema } = require("../../schemas/users");
 const { generateError } = require("../../utils");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
+/**
+ * Función que valida el body de la petición , comprueba que haya un usuario con esos datos en nuestra Db , de ser así compara la contraseña encriptada con la recibida. Si todo va bien genera el token identificativo para el usuario y lo devuelve en la respuesta.
+ */
+
 const loginUser = async (req, res, next) => {
   try {
     await userSchema.validateAsync(req.body);

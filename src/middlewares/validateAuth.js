@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const { generateError } = require("../utils");
 
+// Middleware que se encarga de validar que el usuario este logueado
+
 const validateAuth = (req, res, next) => {
   try {
     const { authorization } = req.headers;
