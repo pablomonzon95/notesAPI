@@ -16,6 +16,7 @@ const initDb = async () => {
     await pool.query("DROP TABLE IF EXISTS notes;");
     await pool.query("DROP TABLE IF EXISTS categories;");
     await pool.query("DROP TABLE IF EXISTS users;");
+    await pool.query("DROP TABLE IF EXISTS images;");
 
     console.log("Creating users table...");
 
@@ -37,6 +38,14 @@ const initDb = async () => {
             name VARCHAR(50) NOT NULL
         );
     `);
+    console.log("Creating images table...");
+    await pool.query(`
+        CREATE TABLE images (
+            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            image VARCHAR(200) NOT NULL, 
+            imageData LONGBLOB NOT NULL
+             );
+        `);
 
     console.log("Creating notes table...");
 
@@ -45,12 +54,15 @@ const initDb = async () => {
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(200) NOT NULL,
             note VARCHAR(5000) NOT NULL,
-            image VARCHAR(200),
+            imageId INT UNSIGNED ,
             public BOOLEAN NOT NULL DEFAULT FALSE,
             categoryId INT UNSIGNED NOT NULL,
             userId INT UNSIGNED NOT NULL,
             FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
-            FOREIGN KEY (categoryId) REFERENCES categories (id) ON DELETE CASCADE
+            FOREIGN KEY (categoryId) REFERENCES categories (id) ON DELETE CASCADE,
+            FOREIGN KEY (imageId) REFERENCES images (id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
           );
           
         

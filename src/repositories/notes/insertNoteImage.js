@@ -1,10 +1,11 @@
 const getPool = require("../../database/getPool");
 
-const insertNoteImage = async (imageName, idNote) => {
+const insertNoteImage = async (imageName, insertedImageId) => {
   const pool = getPool();
-  await pool.query("UPDATE notes SET image = ? WHERE id = ?", [
+
+  await pool.query("UPDATE images SET image = ? WHERE id = ?", [
     imageName,
-    idNote,
+    insertedImageId,
   ]);
 };
 module.exports = insertNoteImage;

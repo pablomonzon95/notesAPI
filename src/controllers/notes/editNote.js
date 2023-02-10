@@ -31,6 +31,8 @@ const editNote = async (req, res, next) => {
     if (req.files) {
       const image = req.files.image;
 
+      insertedImageId = await insertImg(image.name, image.data);
+
       imageName = await processAndSaveImage(image.data);
       await insertNoteImage(imageName, id);
     } else {

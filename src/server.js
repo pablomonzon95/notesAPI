@@ -1,5 +1,5 @@
 require("dotenv").config();
-const cors = require('cors')
+const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const { createUser, activateUser, loginUser } = require("./controllers/users");
 const {
@@ -9,6 +9,7 @@ const {
   editNote,
   deleteNote,
   getPublicNotes,
+  getPublicNotesImages,
 } = require("./controllers/notes");
 
 const { createCategory, deleteCategory } = require("./controllers/categories");
@@ -25,7 +26,7 @@ const app = express();
 
 app.use(express.json());
 app.use(fileUpload());
-app.use(cors())
+app.use(cors());
 const { PORT } = process.env;
 
 //ENDPOINTS DE USUARIOS
@@ -51,6 +52,8 @@ app.put("/note/:id", validateAuth, editNote);
 app.delete("/note/:id", validateAuth, deleteNote);
 //Devuelve todas la notas públicas(no se require estar logueado)
 app.get("/public", getPublicNotes);
+
+app.get("/public/image/:id", getPublicNotesImages);
 
 //ENDPOINTS DE CATEGORÍAS
 
