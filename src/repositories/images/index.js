@@ -1,3 +1,5 @@
 const insertImg = require("./insertImg");
+const selectPublicImageById = require("./selectPublicImageById")
 
-module.exports = { insertImg };
+
+module.exports = { insertImg , selectPublicImageById};

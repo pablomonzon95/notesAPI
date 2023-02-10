@@ -27,17 +27,7 @@ const editNote = async (req, res, next) => {
       generateError("you dont have rights to edit this note", 401);
     }
     await editNoteSchema.validateAsync(req.body);
-    let imageName;
-    if (req.files) {
-      const image = req.files.image;
-
-      insertedImageId = await insertImg(image.name, image.data);
-
-      imageName = await processAndSaveImage(image.data);
-      await insertNoteImage(imageName, id);
-    } else {
-      imageName = "No images";
-    }
+ 
 
     const updatedNote = { ...note, ...req.body };
     await editNoteById(updatedNote);

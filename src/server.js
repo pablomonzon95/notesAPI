@@ -52,7 +52,7 @@ app.put("/note/:id", validateAuth, editNote);
 app.delete("/note/:id", validateAuth, deleteNote);
 //Devuelve todas la notas públicas(no se require estar logueado)
 app.get("/public", getPublicNotes);
-
+// Devuelve todas las imagenes de las notas publicas, se encuentra en el controller anterior.
 app.get("/public/image/:id", getPublicNotesImages);
 
 //ENDPOINTS DE CATEGORÍAS
