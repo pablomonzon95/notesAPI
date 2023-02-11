@@ -1,5 +1,5 @@
 const { selectPublicNotes } = require("../../repositories/notes");
-const {selectPublicImageById} = require("../../repositories/images")
+
 const { noteIdSchema } = require("../../schemas/notes");
 const { generateError } = require("../../utils");
 /**
@@ -16,17 +16,5 @@ const getPublicNotes = async (req, res, next) => {
     next(error);
   }
 };
-const getPublicNotesImages = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    await noteIdSchema.validateAsync(id);
-    const publicImage = await selectPublicImageById(id);
-    if (!publicImage) {
-      generateError("Image doesnt exists", 404);
-    }
-    res.status(200).send(publicImage);
-  } catch (error) {
-    next(error)
-  }
-};
-module.exports = { getPublicNotes, getPublicNotesImages };
+
+module.exports = { getPublicNotes };
