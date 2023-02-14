@@ -11,6 +11,9 @@ const createNote = async (req, res, next) => {
   try {
     const userId = req.auth.id;
 
+    console.log(req.body);
+    console.log(req.files);
+
     await noteSchema.validateAsync(req.body);
     const { title, note, public, categoryId } = req.body;
     let insertedImageId;
@@ -29,7 +32,7 @@ const createNote = async (req, res, next) => {
       title,
       note,
       insertedImageId,
-      public,
+      public: public === "on" ? true : false,
       categoryId,
       userId,
     });

@@ -5,7 +5,8 @@ const createNote = require("../notes/createNote");
 const getNote = require("./getNote");
 const editNote = require("./editNote");
 const deleteNote = require("./deleteNote");
-const { getPublicNotes, getPublicNotesImages } = require("./getPublicNotes");
+const { getPublicNotes } = require("./getPublicNotes");
+const getPublicNote = require("./getPublicNote");
 
 module.exports = {
   getNotes,
@@ -14,5 +15,5 @@ module.exports = {
   editNote,
   deleteNote,
   getPublicNotes,
-  getPublicNotesImages,
+  getPublicNote,
 };
