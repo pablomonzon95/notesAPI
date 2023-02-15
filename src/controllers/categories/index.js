@@ -4,4 +4,5 @@
 
 const createCategory = require("./createCategory");
 const deleteCategory = require("./deleteCategory");
-module.exports = { createCategory, deleteCategory };
+const getCategories = require("./getCategories")
+module.exports = { createCategory, deleteCategory, getCategories };

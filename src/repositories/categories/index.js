@@ -3,5 +3,6 @@
 const insertCategory = require("./insertCategory");
 const selectCategoryById = require("./selectCategoryById");
 const deleteCategoryById = require("./deleteCategoryById");
+const selectCategories = require("./selectCategories")
 
-module.exports = { insertCategory, selectCategoryById, deleteCategoryById };
+module.exports = { insertCategory, selectCategoryById, deleteCategoryById, selectCategories };

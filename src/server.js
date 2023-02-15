@@ -5,14 +5,13 @@ const { createUser, activateUser, loginUser } = require("./controllers/users");
 const {
   getNotes,
   createNote,
-  getNote,
   editNote,
   deleteNote,
   getPublicNotes,
-  getPublicNote,
+  getNotebyId,
 } = require("./controllers/notes");
 
-const { createCategory, deleteCategory } = require("./controllers/categories");
+const { createCategory, deleteCategory, getCategories } = require("./controllers/categories");
 const express = require("express");
 
 const {
@@ -45,15 +44,14 @@ app.post("/notes", validateAuth, createNote);
 //Devuelve la lista de notas del usuario logueado (solo títulos)
 app.get("/notes", validateAuth, getNotes);
 //Devuelve la nota completa con ese id
-app.get("/note/:id", validateAuth, getNote);
-//Edita una nota (título, contenido de la nota o ambos)
+
 app.put("/note/:id", validateAuth, editNote);
 //Borra una nota
 app.delete("/note/:id", validateAuth, deleteNote);
 //Devuelve todas la notas públicas(no se require estar logueado)
 app.get("/public", getPublicNotes);
 
-app.get("/public/:id", getPublicNote);
+app.get("/public/:id", getNotebyId);
 // Devuelve todas las imagenes de las notas publicas, se encuentra en el controller anterior.
 /* app.get("/public/image/:id", getPublicNotesImages); */
 
@@ -63,6 +61,8 @@ app.get("/public/:id", getPublicNote);
 app.post("/categories", validateAuth, createCategory);
 //Borra una categoría (sólo los usuarios con el role de admin pueden borrar categorías)
 app.delete("/categories/:id", validateAuth, checkAdmin, deleteCategory);
+// devuelve los nombres de las categorias
+app.get("/categories", getCategories)
 
 // Middlware 404. Solo las peticiones que no coincidan con ningún endpoint van a llegar aquí
 app.use(handleNotFound);

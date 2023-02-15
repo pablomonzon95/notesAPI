@@ -2,7 +2,7 @@ const { generateError } = require("../../utils");
 const { selectNoteById } = require("../../repositories/notes");
 const { noteIdSchema } = require("../../schemas/notes");
 
-const getPublicNote = async (req, res, next) => {
+const getNotebyId = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -18,4 +18,4 @@ const getPublicNote = async (req, res, next) => {
     next(error);
   }
 };
-module.exports = getPublicNote;
+module.exports = getNotebyId;
