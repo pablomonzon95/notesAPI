@@ -4,7 +4,7 @@ const editNoteSchema = Joi.object({
   title: Joi.string().max(100),
   note: Joi.string().max(5000),
   categoryId: Joi.number().positive(),
-  public: Joi.boolean(),    
+  public: Joi.string().valid("on", "off"),
 })
   .min(1)
   .messages({
