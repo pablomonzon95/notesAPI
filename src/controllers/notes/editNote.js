@@ -19,6 +19,7 @@ const editNote = async (req, res, next) => {
     await noteIdSchema.validateAsync(id);
 
     const note = await selectNoteById(id);
+
     if (!note) {
       generateError("Note doesnt exists", 404);
     }
@@ -26,6 +27,7 @@ const editNote = async (req, res, next) => {
     if (note.userId !== loggedUserId) {
       generateError("you dont have rights to edit this note", 401);
     }
+    console.log(req.body);
     await editNoteSchema.validateAsync(req.body);
 
     if (req.files) {
