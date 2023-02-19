@@ -1,5 +1,6 @@
 const { generateError, processAndSaveImage } = require("../../utils");
 const { editNoteSchema, noteIdSchema } = require("../../schemas/notes");
+const {insertImg} = require ("../../repositories/images")
 const {
   selectNoteById,
   editNoteById,
@@ -29,7 +30,8 @@ const editNote = async (req, res, next) => {
     }
     console.log(req.body);
     await editNoteSchema.validateAsync(req.body);
-
+    
+    let insertedImageId = "";
     if (req.files) {
       const image = req.files.image;
 
