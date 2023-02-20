@@ -44,6 +44,7 @@ const editNote = async (req, res, next) => {
     }
 
     const updatedNote = { ...note, ...req.body };
+    
     await editNoteById(updatedNote);
     res.status(200).send({ status: "ok", data: updatedNote });
   } catch (error) {
