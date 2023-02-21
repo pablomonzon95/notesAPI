@@ -11,7 +11,12 @@ const {
   getNotebyId,
 } = require("./controllers/notes");
 
-const { createCategory, deleteCategory, getCategories } = require("./controllers/categories");
+const {
+  createCategory,
+  deleteCategory,
+  getCategories,
+  getNotesByCategory,
+} = require("./controllers/categories");
 const express = require("express");
 
 const {
@@ -62,7 +67,9 @@ app.post("/categories", validateAuth, createCategory);
 //Borra una categoría (sólo los usuarios con el role de admin pueden borrar categorías)
 app.delete("/categories/:id", validateAuth, checkAdmin, deleteCategory);
 // devuelve los nombres de las categorias
-app.get("/categories", getCategories)
+app.get("/categories", getCategories);
+
+app.get("/categories/:id", getNotesByCategory);
 
 // Middlware 404. Solo las peticiones que no coincidan con ningún endpoint van a llegar aquí
 app.use(handleNotFound);

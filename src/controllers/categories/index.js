@@ -4,5 +4,11 @@
 
 const createCategory = require("./createCategory");
 const deleteCategory = require("./deleteCategory");
-const getCategories = require("./getCategories")
-module.exports = { createCategory, deleteCategory, getCategories };
+const getCategories = require("./getCategories");
+const getNotesByCategory = require("./getNotesByCategory");
+module.exports = {
+  createCategory,
+  deleteCategory,
+  getCategories,
+  getNotesByCategory,
+};

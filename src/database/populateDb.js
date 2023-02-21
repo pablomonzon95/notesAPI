@@ -22,7 +22,7 @@ const populateDb = async () => {
         `);
 
     console.log("Inserting categories...");
-    await pool.query(`INSERT INTO categories (name) VALUES
+    await pool.query(`INSERT INTO categories (name) VALUES ('otras')
 ('hogar'),('escuela'),('deportes')`);
     console.log("Inserting notes...");
 
