@@ -11,8 +11,11 @@ const getNotes = async (req, res, next) => {
     const notes = await selectNotes(id);
     const titles = [];
     for (const note of notes) {
-      titles.push({id: note.id,
-      title:note.title});
+      titles.push({
+        id: note.id,
+        title: note.title,
+        categoryId: note.categoryId,
+      });
     }
 
     res.status(200).send({ status: "ok", data: titles });

@@ -31,6 +31,8 @@ const app = express();
 app.use(express.json());
 app.use(fileUpload());
 app.use(cors());
+app.use("/uploads", express.static("./docs/images"));
+
 const { PORT } = process.env;
 
 //ENDPOINTS DE USUARIOS

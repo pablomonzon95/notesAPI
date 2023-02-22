@@ -1,6 +1,6 @@
 const { generateError, processAndSaveImage } = require("../../utils");
 const { editNoteSchema, noteIdSchema } = require("../../schemas/notes");
-const {insertImg} = require ("../../repositories/images")
+const { insertImg } = require("../../repositories/images");
 const {
   selectNoteById,
   editNoteById,
@@ -30,7 +30,7 @@ const editNote = async (req, res, next) => {
     }
     console.log(req.body);
     await editNoteSchema.validateAsync(req.body);
-    
+
     let insertedImageId = "";
     if (req.files) {
       const image = req.files.image;
@@ -43,8 +43,10 @@ const editNote = async (req, res, next) => {
       imageName = "No images";
     }
 
+    //Tener en cuenta que si no viene una imagen se debe dejar la imagen anterior (si la hay)
+
     const updatedNote = { ...note, ...req.body };
-    
+
     await editNoteById(updatedNote);
     res.status(200).send({ status: "ok", data: updatedNote });
   } catch (error) {
