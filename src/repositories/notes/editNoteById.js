@@ -1,12 +1,14 @@
 const getPool = require("../../database/getPool");
 
 const editNoteById = async (noteToUpdate) => {
-  const { id, title, note, imageId, public, categoryId } = noteToUpdate;
+  const { id, title, note, image, public, categoryId } = noteToUpdate;
   const pool = getPool();
 
+  console.log(public);
+
   await pool.query(
-    "UPDATE notes SET title = ?, note = ?,imageId = ? , public = ?, categoryId = ? WHERE id = ? ",
-    [title, note, imageId, public, categoryId,  id]
+    "UPDATE notes SET title = ?, note = ?,image = ? , public = ?, categoryId = ? WHERE id = ? ",
+    [title, note, image, public, categoryId, id]
   );
 };
 module.exports = editNoteById;

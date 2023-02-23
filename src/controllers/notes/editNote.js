@@ -1,11 +1,7 @@
 const { generateError, processAndSaveImage } = require("../../utils");
 const { editNoteSchema, noteIdSchema } = require("../../schemas/notes");
-const { insertImg } = require("../../repositories/images");
-const {
-  selectNoteById,
-  editNoteById,
-  insertNoteImage,
-} = require("../../repositories/notes");
+
+const { selectNoteById, editNoteById } = require("../../repositories/notes");
 
 /**
  * Función que valida el id recibido como parametro , verifica que la nota a editar exista y pertenezca al usuario que está logueado.
@@ -28,17 +24,17 @@ const editNote = async (req, res, next) => {
     if (note.userId !== loggedUserId) {
       generateError("you dont have rights to edit this note", 401);
     }
-    console.log(req.body);
-    await editNoteSchema.validateAsync(req.body);
+    console.log(req.body.public);
 
-    let insertedImageId = "";
+    await editNoteSchema.validateAsync(req.body);
+    req.body.public === "on"
+      ? (req.body.public = true)
+      : (req.body.public = false);
+
     if (req.files) {
       const image = req.files.image;
 
-      insertedImageId = await insertImg(image.name, image.data);
-
       imageName = await processAndSaveImage(image.data);
-      await insertNoteImage(imageName, insertedImageId);
     } else {
       imageName = "No images";
     }

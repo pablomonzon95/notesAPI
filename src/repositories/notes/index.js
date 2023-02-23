@@ -6,7 +6,6 @@ const selectNoteById = require("./selectNoteById");
 const editNoteById = require("./editNoteById");
 const deleteNoteById = require("./deleteNoteById");
 const selectPublicNotes = require("./selectPublicNotes");
-const insertNoteImage = require("./insertNoteImage");
 
 module.exports = {
   selectNotes,
@@ -15,5 +14,4 @@ module.exports = {
   editNoteById,
   deleteNoteById,
   selectPublicNotes,
-  insertNoteImage,
 };

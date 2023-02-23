@@ -38,14 +38,6 @@ const initDb = async () => {
             name VARCHAR(50) NOT NULL
         );
     `);
-    console.log("Creating images table...");
-    await pool.query(`
-        CREATE TABLE images (
-            id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            image VARCHAR(200) NOT NULL, 
-            imageData LONGBLOB NOT NULL
-             );
-        `);
 
     console.log("Creating notes table...");
 
@@ -54,15 +46,14 @@ const initDb = async () => {
             id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             title VARCHAR(200) NOT NULL,
             note VARCHAR(5000) NOT NULL,
-            imageId INT UNSIGNED ,
+            image VARCHAR (500) ,
             public BOOLEAN NOT NULL DEFAULT FALSE,
             categoryId INT UNSIGNED NOT NULL,
             userId INT UNSIGNED NOT NULL,
             FOREIGN KEY (userId) REFERENCES users (id) ON DELETE CASCADE,
-            FOREIGN KEY (categoryId) REFERENCES categories (id) ON DELETE CASCADE,
-            FOREIGN KEY (imageId) REFERENCES images (id)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
+            FOREIGN KEY (categoryId) REFERENCES categories (id) ON DELETE CASCADE
+            
+            
           );
           
         
