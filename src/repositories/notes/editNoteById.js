@@ -4,7 +4,7 @@ const editNoteById = async (noteToUpdate) => {
   const { id, title, note, image, public, categoryId } = noteToUpdate;
   const pool = getPool();
 
-  console.log(public);
+
 
   await pool.query(
     "UPDATE notes SET title = ?, note = ?,image = ? , public = ?, categoryId = ? WHERE id = ? ",

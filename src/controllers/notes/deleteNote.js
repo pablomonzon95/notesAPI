@@ -22,7 +22,9 @@ const deleteNote = async (req, res, next) => {
       generateError("you dont have rights to delete this note", 401);
     }
     let imagePath;
+    
     if (note.image) {
+      if (note.image !== "No images") {
       imagePath = path.join(
         __dirname,
         "..",
@@ -33,7 +35,7 @@ const deleteNote = async (req, res, next) => {
         note.image
       );
       await fs.rm(imagePath);
-    }
+    }}
 
     await deleteNoteById(id);
 

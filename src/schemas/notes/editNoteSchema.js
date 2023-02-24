@@ -5,6 +5,8 @@ const editNoteSchema = Joi.object({
   note: Joi.string().max(5000),
   categoryId: Joi.number().positive(),
   public: Joi.string().valid("on", "off"),
+  deleteImage: Joi.string().valid("on", "off"),
+  image:Joi.string(),
 })
   .min(1)
   .messages({

@@ -9,7 +9,7 @@ const { generateError } = require("../../utils");
 const getPublicNotes = async (req, res, next) => {
   try {
     const notes = await selectPublicNotes();
-    console.log(notes);
+
 
     res.status(200).send({ status: "ok", data: notes });
   } catch (error) {

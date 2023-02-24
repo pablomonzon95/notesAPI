@@ -7,7 +7,7 @@ const selectNotesByCategoryId = async (id) => {
     "SELECT * FROM note WHERE categoryId = ?",
     [id]
   );
-  console.log(notes);
+ 
   return notes;
 };
 module.exports = selectNotesByCategoryId;
