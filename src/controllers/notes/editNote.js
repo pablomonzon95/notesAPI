@@ -33,11 +33,20 @@ const editNote = async (req, res, next) => {
 
     let imageName;
 
+    req.body.deleteImage;
+    req.body.deleteImage === "on"
+      ? (req.body.deleteImage = true)
+      : (req.body.deleteImage = false);
+
+    console.log(req.body.deleteImage);
     if (req.files) {
       const image = req.files.image;
       imageName = await processAndSaveImage(image.data);
     } else {
-      if (note.image !== null || note.image !== "No images") {
+      if (
+        (note.image !== null || note.image !== "No images") &&
+        !req.body.deleteImage
+      ) {
         imageName = note.image;
       } else {
         imageName = "No images";
