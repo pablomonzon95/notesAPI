@@ -38,7 +38,6 @@ const editNote = async (req, res, next) => {
       ? (req.body.deleteImage = true)
       : (req.body.deleteImage = false);
 
-    console.log(req.body.deleteImage);
     if (req.files) {
       const image = req.files.image;
       imageName = await processAndSaveImage(image.data);
@@ -54,8 +53,6 @@ const editNote = async (req, res, next) => {
     }
     req.body.image = imageName;
 
-    //Tener en cuenta que si no viene una imagen se debe dejar la imagen anterior (si la hay)
-    console.log(req.body);
     const updatedNote = { ...note, ...req.body };
 
     await editNoteById(updatedNote);
