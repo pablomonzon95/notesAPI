@@ -1,7 +1,8 @@
 const { generateError, processAndSaveImage } = require("../../utils");
 const { editNoteSchema, noteIdSchema } = require("../../schemas/notes");
-
 const { selectNoteById, editNoteById } = require("../../repositories/notes");
+const path = require("path");
+const fs = require("fs/promises");
 
 /**
  * Función que valida el id recibido como parametro , verifica que la nota a editar exista y pertenezca al usuario que está logueado.
@@ -52,8 +53,26 @@ const editNote = async (req, res, next) => {
       }
     }
     req.body.image = imageName;
+    /* let imagePath;
 
+    if (imageName) {
+      if (imageName !== "No images") {
+        imagePath = path.join(
+          __dirname,
+          "..",
+          "..",
+          "..",
+          "docs",
+          "images",
+          imageName
+        );
+        await fs.rm(imagePath);
+      }
+    } */
+    console.log(req.body);
     const updatedNote = { ...note, ...req.body };
+
+    console.log(updatedNote);
 
     await editNoteById(updatedNote);
     res.status(200).send({ status: "ok", data: updatedNote });
