@@ -25,6 +25,8 @@ const editNote = async (req, res, next) => {
     if (note.userId !== loggedUserId) {
       generateError("you dont have rights to edit this note", 401);
     }
+
+    
     req.body.public;
 
     await editNoteSchema.validateAsync(req.body);
@@ -53,10 +55,14 @@ const editNote = async (req, res, next) => {
       }
     }
     req.body.image = imageName;
-    /* let imagePath;
 
-    if (imageName) {
-      if (imageName !== "No images") {
+
+
+ 
+     let imagePath;
+
+    if (note.image !== req.body.image && note.image !== "No images") {
+      
         imagePath = path.join(
           __dirname,
           "..",
@@ -64,15 +70,14 @@ const editNote = async (req, res, next) => {
           "..",
           "docs",
           "images",
-          imageName
+          note.image
         );
         await fs.rm(imagePath);
       }
-    } */
-    console.log(req.body);
+    
+
     const updatedNote = { ...note, ...req.body };
 
-    console.log(updatedNote);
 
     await editNoteById(updatedNote);
     res.status(200).send({ status: "ok", data: updatedNote });
