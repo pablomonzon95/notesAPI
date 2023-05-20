@@ -1,3 +1,6 @@
+SPANISH
+
+
 Api_notes es el segundo proyecto en el bootcamp full-stack developer de Hack-a-boss.
 
 Esta api permite a los usuarios que se han registrado y esten logueados crear,editar, consultar y eliminar sus propias notas.
@@ -44,3 +47,41 @@ Todos los módulos necesarios estan referenciados en al apartado dependencies de
 Es necesario hacer "npm install" para instalarlos.
 
 -->> Esta api ha sido creado por Pablo Monzon & Fco Antonio Lorca <<--
+
+
+
+ENGLISH
+
+
+
+Api_notes is the second project in the Hack-a-boss full-stack developer bootcamp.
+
+This REST API allows registered and logged in users to create, edit, view and delete their own notes. Notes may or may not be accompanied by an image.
+To register, the user must send an email and a password in the body of the request. The registration email will receive an email with a link to activate the account. Once the account is activated, the user can log in and manage their notes.
+
+Here are the different api routes:
+
+-- USER ROUTES
+  POST "/users" => Create a new user (an email and password are required).
+GET "/activate/:registrationCode" => Activate the user using a randomly generated code when the user is created (it is necessary to activate the account to be able to login).
+  POST "/login" => Logs in the user by generating a unique identification token (it is necessary to be logged in to manage the notes).
+
+-- NOTE PATHS POST "/notes" => Create a new note for the logged in user, in the note it is mandatory to indicate: -- "title" for the title. -- "note" for the content of the note. -- "categoryId" refers to the category to which said note belongs, indicated by a number (which is the id of the category). Optionally, you can add: -- An image -- A "public" field in which, if its value is true, the note is marked as public (by default, all notes are created as private).
+  PUT "/note/:id" => Allows you to edit a note already created, you can edit any field of the note (title, note, category or image). GET "/notes" => Returns the list of notes of the logged in user (only returns the titles).
+  GET "/note/:id" => Returns the complete note of the id passed as a parameter as long as that note belongs to the logged in user. GET "/public" => This route returns all the notes of all the users that have been marked as public, (it is not necessary to be registered to consult the public notes.)
+
+All the data that comes to us from the user is validated through JOI
+
+For the correct operation of this api the following modules are required:
+  bcrypt -> To encrypt passwords
+  dotenv -> Read files.
+env express -> Start the server
+  express-fileupload -> Read files submitted via form-data
+  joi -> Validation of data sent by the user
+  jsonwebtoken -> It helps us to generate the identification token of each user
+mysql2 -> Generates the connections with the node-mailjet database -> Is in charge of sending an email to the registered user with the link to activate their account
+sharp -> Module in charge of processing the images uuid -> Generates random strings that we use as unique identifier of the images
+
+All the necessary modules are referenced in the dependencies section of the package.json. It is necessary to do "npm install" to install them.
+
+-->> This api has been created by Pablo Monzon & Fco Antonio Lorca <<--
